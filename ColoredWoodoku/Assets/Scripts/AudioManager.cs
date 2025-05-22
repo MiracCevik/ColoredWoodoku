@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip mainMenuMusic;
     [SerializeField] private AudioClip gameMusic;
     [SerializeField] private AudioClip onlineMusic;
+
+    [SerializeField] private Sprite musicOnSprite;
+    [SerializeField] private Sprite musicOffSprite;
+    [SerializeField] private Image musicButtonImage;
 
     private void Awake()
     {
@@ -56,6 +61,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         UpdateVolume();
+        PlaySceneMusic(SceneManager.GetActiveScene().name);
     }
 
     private void LoadSettings()
@@ -195,24 +201,40 @@ public class AudioManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        PlaySceneMusic(scene.name);
+    }
+
+    private void PlaySceneMusic(string sceneName)
+    {
         musicSource.Stop();
-        switch(scene.name)
+        switch(sceneName)
         {
             case "Main Menu":
                 PlayMusic(mainMenuMusic);
                 break;
-                
             case "Game":
                 PlayMusic(gameMusic);
                 break;
-                
             case "Online":
                 PlayMusic(onlineMusic);
                 break;
-                
             default:
                 PlayMusic(mainMenuMusic);
                 break;
+        }
+    }
+
+    public void ToggleMusicPlayback()
+    {
+        if (musicSource.isPlaying)
+        {
+            musicSource.Pause();
+            musicButtonImage.sprite = musicOffSprite;
+        }
+        else
+        {
+            musicSource.Play();
+            musicButtonImage.sprite = musicOnSprite;
         }
     }
 
