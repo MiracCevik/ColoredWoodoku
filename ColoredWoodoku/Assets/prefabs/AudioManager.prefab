@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7199456590079262028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1247524338548727306}
+  - component: {fileID: 1748414862995320532}
+  - component: {fileID: 9069912791020627358}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1247524338548727306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199456590079262028}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0125158, y: -0.56699675, z: 114.62215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1748414862995320532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199456590079262028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fff55dd9f1f174486262711f0ab1fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 0}
+  soundSource: {fileID: 0}
+  mainMenuMusic: {fileID: 8300000, guid: 75cb7118e6d543b4e89b2f97cf469e10, type: 3}
+  gameMusic: {fileID: 8300000, guid: df7fd6e0d55a0ed4cbc47b66c2592e01, type: 3}
+  onlineMusic: {fileID: 8300000, guid: dd9ee19eeb00cfd4bac2715f9b9c21d6, type: 3}
+--- !u!114 &9069912791020627358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199456590079262028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ded2c483ea56342b38c4c32af7d5d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsPanel: {fileID: 0}
+  soundButton: {fileID: 0}
+  musicButton: {fileID: 0}
+  soundImage: {fileID: 0}
+  musicImage: {fileID: 0}
+  soundOnSprite: {fileID: 21300000, guid: e15ab5b557074904eac660505781a1f8, type: 3}
+  musicOnSprite: {fileID: 21300000, guid: e15ab5b557074904eac660505781a1f8, type: 3}
+  offSprite: {fileID: 21300000, guid: fe87ba08213f8b74f94280a295d92b8f, type: 3}
