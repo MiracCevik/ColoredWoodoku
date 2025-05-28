@@ -202,7 +202,7 @@ public class GridSquare : MonoBehaviour
             Selected = true;
             hooverImage.gameObject.SetActive(true);
         }
-        else if (collision.GetComponent<ShapeSquare>() != null)
+        else if (collision.GetComponent<ShapeSquare>() != null && !(collision.transform.parent?.GetComponent<HammerSquare>()) && !(collision.transform.parent?.GetComponent<Area3x3Hammer>()) && !(collision.transform.parent?.GetComponent<LineEraser>()))
         {
             collision.GetComponent<ShapeSquare>().SetOccupied();
         }
@@ -215,7 +215,7 @@ public class GridSquare : MonoBehaviour
         {
             hooverImage.gameObject.SetActive(true);
         }
-        else if (collision.GetComponent<ShapeSquare>() != null)
+        else if (collision.GetComponent<ShapeSquare>() != null && !(collision.transform.parent?.GetComponent<HammerSquare>()) && !(collision.transform.parent?.GetComponent<Area3x3Hammer>()) && !(collision.transform.parent?.GetComponent<LineEraser>()))
         {
             collision.GetComponent<ShapeSquare>().SetOccupied();
         }
@@ -228,7 +228,7 @@ public class GridSquare : MonoBehaviour
             Selected = false;
             hooverImage.gameObject.SetActive(false);
         }
-        else if (collision.GetComponent<ShapeSquare>() != null)
+        else if (collision.GetComponent<ShapeSquare>() != null && !(collision.transform.parent?.GetComponent<HammerSquare>()) && !(collision.transform.parent?.GetComponent<Area3x3Hammer>()) && !(collision.transform.parent?.GetComponent<LineEraser>()))
         {
             collision.GetComponent<ShapeSquare>().UnSetOccupied();
         }
