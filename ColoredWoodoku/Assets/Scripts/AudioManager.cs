@@ -270,7 +270,6 @@ public class AudioManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        // Temizlik yapmaya gerek yok, yeni sahne yüklendiğinde otomatik bağlanacak
         SceneManager.LoadScene(sceneName);
     }
 } 

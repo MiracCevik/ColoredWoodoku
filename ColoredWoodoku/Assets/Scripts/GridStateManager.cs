@@ -330,9 +330,7 @@ public class GridStateManager : NetworkBehaviour
         
         CollectLocalGridState();
         
-        try
-        {
-            int occupiedCount = localGridState.Count(s => s.isOccupied);
+        int occupiedCount = localGridState.Count(s => s.isOccupied);
             if (occupiedCount == 0)
             {
                 return;
@@ -350,11 +348,8 @@ public class GridStateManager : NetworkBehaviour
             }
             
             SendGridStateToServerRpc(squareIndices, occupiedStates, colorIndices);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"Error in ShareGridState: {e.Message}");
-        }
+        
+    
     }
     
     private int ConvertShapeColorToIndex(Shape.ShapeColor color)

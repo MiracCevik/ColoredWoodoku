@@ -8,7 +8,7 @@ using System.Linq;
 
 public class SettingsUI : MonoBehaviour
 {
-    public static SettingsUI Instance; // Singleton instance ekliyoruz
+    public static SettingsUI Instance;
 
     [Header("Settings Panel")]
     [SerializeField] private GameObject settingsPanel;
@@ -31,7 +31,6 @@ public class SettingsUI : MonoBehaviour
     
     private void Awake()
     {
-        // Singleton pattern implementasyonu
         if(Instance == null)
         {
             Instance = this;
@@ -47,7 +46,6 @@ public class SettingsUI : MonoBehaviour
             Debug.unityLogger.logEnabled = false;
         }
 
-        // Her sahne geçişinde otomatik güncelleme
         SceneManager.activeSceneChanged += (oldScene, newScene) => UpdateButtonStates();
     }
     
@@ -59,17 +57,14 @@ public class SettingsUI : MonoBehaviour
         if (soundButtonObject != null) soundButtonObject.SetActive(false);
         if (musicButtonObject != null) musicButtonObject.SetActive(false);
         
-        // Buton referanslarını otomatik bul
         if(settingsButton == null) settingsButton = GameObject.FindGameObjectWithTag("SettingsButton").GetComponent<Button>();
         if(soundButton == null) soundButton = GameObject.FindGameObjectWithTag("SoundButton").GetComponent<Button>();
         if(musicButton == null) musicButton = GameObject.FindGameObjectWithTag("MusicButton").GetComponent<Button>();
 
-        // Eventleri dinamik olarak bağla
         settingsButton?.onClick.AddListener(ToggleSettingsPanel);
         soundButton?.onClick.AddListener(ToggleSound);
         musicButton?.onClick.AddListener(ToggleMusic);
 
-        // Başlangıç durumunu ayarla
         UpdateButtonStates();
     }
     
@@ -82,7 +77,6 @@ public class SettingsUI : MonoBehaviour
             bool isSoundMuted = audioManager.IsSoundMuted();
             bool isMusicMuted = audioManager.IsMusicMuted();
             
-            // Tüm sahnelerdeki görselleri güncelle
             UpdateAllSoundSprites(isSoundMuted);
             UpdateAllMusicSprites(isMusicMuted);
         }
@@ -114,7 +108,6 @@ public class SettingsUI : MonoBehaviour
     
     private void OnDestroy()
     {
-        // Event bağlantılarını temizle
         if(settingsButton != null) settingsButton.onClick.RemoveListener(ToggleSettingsPanel);
         if(soundButton != null) soundButton.onClick.RemoveListener(ToggleSound);
         if(musicButton != null) musicButton.onClick.RemoveListener(ToggleMusic);
@@ -158,10 +151,7 @@ public class SettingsUI : MonoBehaviour
             bool isMuted = audioManager.ToggleMuteSound();
             UpdateAllSoundSprites(isMuted);
         }
-        else
-        {
-            Debug.LogWarning("AudioManager veya soundButton referansı eksik!");
-        }
+      
     }
     
     public void ToggleMusic()
@@ -189,7 +179,6 @@ public class SettingsUI : MonoBehaviour
         }
     }
 
-    // Scene değişimlerinde çalışacak metod
     public void ReinitializeUI()
     {
         StartCoroutine(ReinitializeUICoroutine());
@@ -198,12 +187,11 @@ public class SettingsUI : MonoBehaviour
     private IEnumerator ReinitializeUICoroutine()
     {
         yield return new WaitForEndOfFrame();
-        Start(); // UI elementleri yeniden başlat
+        Start();
     }
 
     public void ClearButtonReferences()
     {
-        // Tüm buton referanslarını ve eventlerini temizle
         if(settingsButton != null)
         {
             settingsButton.onClick.RemoveAllListeners();
@@ -220,7 +208,6 @@ public class SettingsUI : MonoBehaviour
             musicButton = null;
         }
         
-        // UI elementlerini yeniden bul
         InitializeUI();
     }
 
@@ -260,19 +247,15 @@ public class SettingsUI : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         
-        // Settings Panel
         if(settingsPanel == null)
         {
             settingsPanel = GameObject.Find("SettingsPanel");
-            if(settingsPanel == null) Debug.LogWarning("SettingsPanel bulunamadı!");
+           
         }
-
-        // Butonları yeniden bağla
         BindButton(ref settingsButton, "SettingsButton", ToggleSettingsPanel);
         BindButton(ref soundButton, "SoundButton", ToggleSound);
         BindButton(ref musicButton, "MusicButton", ToggleMusic);
 
-        // Görsel elementleri kontrol et
         CheckVisualComponents();
     }
 

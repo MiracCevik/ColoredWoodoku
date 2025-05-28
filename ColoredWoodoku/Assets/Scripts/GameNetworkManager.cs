@@ -20,7 +20,7 @@ public class GameNetworkManager : NetworkBehaviour
     [SerializeField] private Button timeout30Button;
     [SerializeField] private Button timeout60Button;
     private NetworkVariable<int> selectedTimeout = new NetworkVariable<int>(
-        30, // Default 30 seconds
+        30,
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
@@ -104,27 +104,21 @@ public class GameNetworkManager : NetworkBehaviour
         gameEndedDueToTimeout.OnValueChanged += OnGameEndedDueToTimeoutChanged;
         timeoutLoserId.OnValueChanged += OnTimeoutLoserIdChanged;
         
-        // Buton click eventlerini doğru şekilde bağla
         timeout10Button.onClick.AddListener(() => { 
-            Debug.Log("10s butonuna basıldı");
             selectedTimeout.Value = 10; 
         });
         timeout30Button.onClick.AddListener(() => { 
-            Debug.Log("30s butonuna basıldı");
             selectedTimeout.Value = 30;
         });
         timeout60Button.onClick.AddListener(() => { 
-            Debug.Log("60s butonuna basıldı");
             selectedTimeout.Value = 60;
         });
         
-        // Paneli gizle
         if(timeoutSelectionPanel != null)
         {
             timeoutSelectionPanel.SetActive(false);
         }
 
-        // Buton başlangıç durumu
         if(selectTimeoutButton != null)
         {
             selectTimeoutButton.gameObject.SetActive(true);
@@ -199,17 +193,14 @@ public class GameNetworkManager : NetworkBehaviour
             
             if (isDraw.Value)
             {
-                Debug.Log("Showing DRAW message");
                 timeoutMessageText.text = "DRAW";
             }
             else if (isLocalPlayerLoser)
             {
-                Debug.Log("Showing LOSE message");
                 timeoutMessageText.text = "LOSE";
             }
             else
             {
-                Debug.Log("Showing WIN message");
                 timeoutMessageText.text = "WIN";
             }
         }
@@ -375,7 +366,6 @@ public class GameNetworkManager : NetworkBehaviour
             StartCoroutine(StartInitialTimerAfterDelay(1.0f));
         }
 
-        // Timeout butonunu aktif et
         if(selectTimeoutButton != null)
         {
             selectTimeoutButton.interactable = true;
@@ -460,7 +450,6 @@ public class GameNetworkManager : NetworkBehaviour
         }
         networkUI?.ShowPanel(false);
         
-        // Client'da timeout butonunu devre dışı bırak
         if(selectTimeoutButton != null)
         {
             selectTimeoutButton.gameObject.SetActive(false);
@@ -819,7 +808,6 @@ public class GameNetworkManager : NetworkBehaviour
     [ClientRpc]
     private void DrawGameClientRpc()
     {
-        Debug.Log("Received DrawGameClientRpc, isDraw=" + isDraw.Value);
         
         GameObject timerObject = GameObject.Find("Timer");
         if (timerObject != null)
@@ -851,7 +839,6 @@ public class GameNetworkManager : NetworkBehaviour
     {
         if (!IsServer) return;
         
-        Debug.Log($"Timeout süresi ayarlanıyor: {seconds}s");
         TurnTimer.Instance.SetTurnDuration(seconds);
         selectedTimeout.Value = seconds;
     }
