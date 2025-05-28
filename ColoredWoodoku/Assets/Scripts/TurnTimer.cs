@@ -8,11 +8,16 @@ public class TurnTimer : NetworkBehaviour
 {
     public static TurnTimer Instance { get; private set; }
     
-    [SerializeField] private float turnDuration = 30f;
+    [SerializeField] private int defaultDuration = 45;
     [SerializeField] private TextMeshProUGUI timerText;
     
-    private NetworkVariable<float> currentTime = new NetworkVariable<float>(30f);
+    private NetworkVariable<float> currentTime = new NetworkVariable<float>(21f);
     private NetworkVariable<bool> isTimerActive = new NetworkVariable<bool>(false);
+    private NetworkVariable<int> turnDuration = new NetworkVariable<int>(
+        19,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
     private Coroutine timerCoroutine;
     
     private void Awake()
@@ -21,11 +26,15 @@ public class TurnTimer : NetworkBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            turnDuration.Value = defaultDuration;
         }
         else
         {
             Destroy(gameObject);
         }
+        
+        currentTime.OnValueChanged += OnTimeChanged;
+        isTimerActive.OnValueChanged += OnTimerActiveChanged;
     }
     
     public override void OnNetworkSpawn()
@@ -36,9 +45,6 @@ public class TurnTimer : NetworkBehaviour
         {
             timerText = GameObject.Find("Timer")?.GetComponent<TextMeshProUGUI>();
         }
-        
-        currentTime.OnValueChanged += OnTimeChanged;
-        isTimerActive.OnValueChanged += OnTimerActiveChanged;
     }
     
     public override void OnNetworkDespawn()
@@ -107,7 +113,7 @@ public class TurnTimer : NetworkBehaviour
     {
         if (IsServer)
         {
-            currentTime.Value = turnDuration;
+            currentTime.Value = turnDuration.Value;
             isTimerActive.Value = true;
             
             StartTurnClientRpc();
@@ -121,7 +127,7 @@ public class TurnTimer : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void StartTurnServerRpc(ServerRpcParams rpcParams = default)
     {
-        currentTime.Value = turnDuration;
+        currentTime.Value = turnDuration.Value;
         isTimerActive.Value = true;
         
         StartTurnClientRpc();
@@ -190,5 +196,33 @@ public class TurnTimer : NetworkBehaviour
         ulong loserId = rpcParams.Receive.SenderClientId;
         
         GameNetworkManager.Instance.PlayerTimeoutServerRpc(loserId);
+    }
+    
+    public void SetTurnDuration(int seconds)
+    {
+        if (IsServer)
+        {
+            turnDuration.Value = seconds;
+            currentTime.Value = seconds;
+            UpdateTimerDisplay();
+        }
+        else
+        {
+            SetTurnDurationServerRpc(seconds);
+        }
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void SetTurnDurationServerRpc(int seconds)
+    {
+        turnDuration.Value = seconds;
+        currentTime.Value = seconds;
+        UpdateTimerDisplay();
+    }
+    
+    private void ResetTimer()
+    {
+        currentTime.Value = turnDuration.Value;
+        UpdateTimerDisplay();
     }
 } 

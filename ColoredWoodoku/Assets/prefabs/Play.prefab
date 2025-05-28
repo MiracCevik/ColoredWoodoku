@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2260086622832754649}
   m_Layer: 5
   m_Name: SoundButtonObject
-  m_TagString: Untagged
+  m_TagString: SoundUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -21}
+  m_AnchoredPosition: {x: 0, y: -20.999998}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2380275480656480352
@@ -137,16 +137,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2380275480656480352}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1345367919931425099}
+  m_Father: {fileID: 2916854514468920419}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 780.8}
+  m_AnchoredPosition: {x: 0, y: 758.8}
   m_SizeDelta: {x: 982.2, y: 295.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6798796571005646806
@@ -218,9 +218,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1819278702271247075}
-  - {fileID: 273577237794430490}
   - {fileID: 2916854514468920419}
+  - {fileID: 273577237794430490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -323,7 +322,7 @@ GameObject:
   - component: {fileID: 4054722540126410663}
   m_Layer: 5
   m_Name: MusicButtonObject
-  m_TagString: Untagged
+  m_TagString: MusicUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -637,7 +636,7 @@ GameObject:
   - component: {fileID: 2916854514468920419}
   m_Layer: 5
   m_Name: SettingsPanel
-  m_TagString: Untagged
+  m_TagString: SettingsPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -654,6 +653,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1819278702271247075}
   - {fileID: 3124340608912489270}
   - {fileID: 4934770537399079782}
   m_Father: {fileID: 1345367919931425099}

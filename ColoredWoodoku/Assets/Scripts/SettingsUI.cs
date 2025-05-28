@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class SettingsUI : MonoBehaviour
 {
@@ -45,6 +46,9 @@ public class SettingsUI : MonoBehaviour
         {
             Debug.unityLogger.logEnabled = false;
         }
+
+        // Her sahne geçişinde otomatik güncelleme
+        SceneManager.activeSceneChanged += (oldScene, newScene) => UpdateButtonStates();
     }
     
     private void Start()
@@ -72,10 +76,39 @@ public class SettingsUI : MonoBehaviour
     private void UpdateButtonStates()
     {
         if(audioManager == null) audioManager = AudioManager.Instance;
+        
         if(audioManager != null)
         {
-            UpdateSoundButtonSprite(audioManager.IsSoundMuted());
-            UpdateMusicButtonSprite(audioManager.IsMusicMuted());
+            bool isSoundMuted = audioManager.IsSoundMuted();
+            bool isMusicMuted = audioManager.IsMusicMuted();
+            
+            // Tüm sahnelerdeki görselleri güncelle
+            UpdateAllSoundSprites(isSoundMuted);
+            UpdateAllMusicSprites(isMusicMuted);
+        }
+    }
+    
+    private void UpdateAllSoundSprites(bool isMuted)
+    {
+        Image[] allSoundImages = GameObject.FindObjectsOfType<Image>(true)
+                                          .Where(img => img.gameObject.CompareTag("SoundUI"))
+                                          .ToArray();
+        
+        foreach(Image img in allSoundImages)
+        {
+            img.sprite = isMuted ? offSprite : soundOnSprite;
+        }
+    }
+    
+    private void UpdateAllMusicSprites(bool isMuted)
+    {
+        Image[] allMusicImages = GameObject.FindObjectsOfType<Image>(true)
+                                          .Where(img => img.gameObject.CompareTag("MusicUI"))
+                                          .ToArray();
+        
+        foreach(Image img in allMusicImages)
+        {
+            img.sprite = isMuted ? offSprite : musicOnSprite;
         }
     }
     
@@ -123,7 +156,7 @@ public class SettingsUI : MonoBehaviour
         if(audioManager != null && soundButton != null)
         {
             bool isMuted = audioManager.ToggleMuteSound();
-            UpdateSoundButtonSprite(isMuted);
+            UpdateAllSoundSprites(isMuted);
         }
         else
         {
@@ -136,7 +169,7 @@ public class SettingsUI : MonoBehaviour
         if (audioManager != null)
         {
             bool isMuted = audioManager.ToggleMuteMusic();
-            UpdateMusicButtonSprite(isMuted);
+            UpdateAllMusicSprites(isMuted);
         }
     }
     

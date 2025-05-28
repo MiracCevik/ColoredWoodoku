@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameNetworkManager : NetworkBehaviour
 {
@@ -13,6 +14,17 @@ public class GameNetworkManager : NetworkBehaviour
     public TextMeshProUGUI winnerText;
     public TextMeshProUGUI timeoutMessageText;
     
+    [Header("Timeout Settings")]
+    [SerializeField] private GameObject timeoutSelectionPanel;
+    [SerializeField] private Button timeout10Button;
+    [SerializeField] private Button timeout30Button;
+    [SerializeField] private Button timeout60Button;
+    private NetworkVariable<int> selectedTimeout = new NetworkVariable<int>(
+        30, // Default 30 seconds
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+
     private NetworkVariable<bool> gameEndedDueToTimeout = new NetworkVariable<bool>(
         false,
         NetworkVariableReadPermission.Everyone,
@@ -47,6 +59,9 @@ public class GameNetworkManager : NetworkBehaviour
     private bool initialShapesGenerated = false;
 
     private NetworkVariable<bool> gridStateManagerSpawned = new NetworkVariable<bool>(false);
+
+    [Header("UI Elements")]
+    [SerializeField] private Button selectTimeoutButton;
 
     void Awake()
     {
@@ -88,6 +103,33 @@ public class GameNetworkManager : NetworkBehaviour
         
         gameEndedDueToTimeout.OnValueChanged += OnGameEndedDueToTimeoutChanged;
         timeoutLoserId.OnValueChanged += OnTimeoutLoserIdChanged;
+        
+        // Buton click eventlerini doğru şekilde bağla
+        timeout10Button.onClick.AddListener(() => { 
+            Debug.Log("10s butonuna basıldı");
+            selectedTimeout.Value = 10; 
+        });
+        timeout30Button.onClick.AddListener(() => { 
+            Debug.Log("30s butonuna basıldı");
+            selectedTimeout.Value = 30;
+        });
+        timeout60Button.onClick.AddListener(() => { 
+            Debug.Log("60s butonuna basıldı");
+            selectedTimeout.Value = 60;
+        });
+        
+        // Paneli gizle
+        if(timeoutSelectionPanel != null)
+        {
+            timeoutSelectionPanel.SetActive(false);
+        }
+
+        // Buton başlangıç durumu
+        if(selectTimeoutButton != null)
+        {
+            selectTimeoutButton.gameObject.SetActive(true);
+            selectTimeoutButton.interactable = false;
+        }
     }
 
     private void OnDestroy()
@@ -332,6 +374,12 @@ public class GameNetworkManager : NetworkBehaviour
             
             StartCoroutine(StartInitialTimerAfterDelay(1.0f));
         }
+
+        // Timeout butonunu aktif et
+        if(selectTimeoutButton != null)
+        {
+            selectTimeoutButton.interactable = true;
+        }
     }
     
     private IEnumerator StartInitialTimerAfterDelay(float delay)
@@ -341,6 +389,7 @@ public class GameNetworkManager : NetworkBehaviour
         TurnTimer turnTimer = FindObjectOfType<TurnTimer>();
         if (turnTimer != null)
         {
+            turnTimer.SetTurnDuration(selectedTimeout.Value);
             turnTimer.StartTurn();
         }
     }
@@ -411,6 +460,11 @@ public class GameNetworkManager : NetworkBehaviour
         }
         networkUI?.ShowPanel(false);
         
+        // Client'da timeout butonunu devre dışı bırak
+        if(selectTimeoutButton != null)
+        {
+            selectTimeoutButton.gameObject.SetActive(false);
+        }
     }
 
     public void LocalPlayerFinishedPlacingShapes()
@@ -782,5 +836,52 @@ public class GameNetworkManager : NetworkBehaviour
         DisableAllGridInteractions();
         
         StartCoroutine(RestartGameAfterDelay(5.0f));
+    }
+
+    public void ToggleTimeoutSelection()
+    {
+        if(timeoutSelectionPanel != null)
+        {
+            bool isActive = !timeoutSelectionPanel.activeSelf;
+            timeoutSelectionPanel.SetActive(isActive);
+        }
+    }
+
+    private void SetTimeout(int seconds)
+    {
+        if (!IsServer) return;
+        
+        Debug.Log($"Timeout süresi ayarlanıyor: {seconds}s");
+        TurnTimer.Instance.SetTurnDuration(seconds);
+        selectedTimeout.Value = seconds;
+    }
+
+    private void UpdateTimerDuration()
+    {
+        TurnTimer turnTimer = FindObjectOfType<TurnTimer>();
+        if(turnTimer != null)
+        {
+            turnTimer.SetTurnDuration(selectedTimeout.Value);
+        }
+    }
+
+    [ClientRpc]
+    private void SyncTimeoutDurationClientRpc(int duration)
+    {
+        TurnTimer turnTimer = FindObjectOfType<TurnTimer>();
+        if(turnTimer != null)
+        {
+            turnTimer.SetTurnDuration(duration);
+        }
+    }
+
+    public void StartHostWithTimeout()
+    {
+        StartHost();
+        if(IsServer)
+        {
+            UpdateTimerDuration();
+            SyncTimeoutDurationClientRpc(selectedTimeout.Value);
+        }
     }
 } 
