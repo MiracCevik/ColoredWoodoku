@@ -795,15 +795,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1458725592 stripped
+--- !u!114 &1195914155 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9069912791020627358, guid: f0816f0637363754c883d097a377944a, type: 3}
-  m_PrefabInstance: {fileID: 3575419481036915469}
+  m_CorrespondingSourceObject: {fileID: 6854849331781349956, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
+  m_PrefabInstance: {fileID: 16080306682544617}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8ded2c483ea56342b38c4c32af7d5d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1339084066 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 148047636032967371, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
+  m_PrefabInstance: {fileID: 16080306682544617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1494767608
@@ -936,6 +947,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0fff55dd9f1f174486262711f0ab1fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1755338228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5419552121221873529, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
+  m_PrefabInstance: {fileID: 16080306682544617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1766953500
@@ -1223,10 +1245,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1766953504}
     m_Modifications:
-    - target: {fileID: 148047636032967371, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1458725592}
     - target: {fileID: 1345367919931425099, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1311,14 +1329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Play
       objectReference: {fileID: 0}
-    - target: {fileID: 5419552121221873529, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1746533071}
-    - target: {fileID: 6854849331781349956, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1458725592}
+    - target: {fileID: 6640573604172364109, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
+      propertyPath: m_TagString
+      value: SettingsPanel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1391,15 +1405,27 @@ PrefabInstance:
     - target: {fileID: 9069912791020627358, guid: f0816f0637363754c883d097a377944a, type: 3}
       propertyPath: musicButton
       value: 
-      objectReference: {fileID: 2015205696}
+      objectReference: {fileID: 1755338228}
     - target: {fileID: 9069912791020627358, guid: f0816f0637363754c883d097a377944a, type: 3}
       propertyPath: soundButton
       value: 
-      objectReference: {fileID: 1501991147}
+      objectReference: {fileID: 1339084066}
     - target: {fileID: 9069912791020627358, guid: f0816f0637363754c883d097a377944a, type: 3}
       propertyPath: settingsPanel
       value: 
       objectReference: {fileID: 2045633336}
+    - target: {fileID: 9069912791020627358, guid: f0816f0637363754c883d097a377944a, type: 3}
+      propertyPath: settingsButton
+      value: 
+      objectReference: {fileID: 1195914155}
+    - target: {fileID: 9069912791020627358, guid: f0816f0637363754c883d097a377944a, type: 3}
+      propertyPath: musicButtonObject
+      value: 
+      objectReference: {fileID: 2015205696}
+    - target: {fileID: 9069912791020627358, guid: f0816f0637363754c883d097a377944a, type: 3}
+      propertyPath: soundButtonObject
+      value: 
+      objectReference: {fileID: 1501991147}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

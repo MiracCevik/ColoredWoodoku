@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3827351026200681643}
   - component: {fileID: 2260086622832754649}
   m_Layer: 5
-  m_Name: Sound
+  m_Name: SoundButtonObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 8507288808934946262}
   - component: {fileID: 4054722540126410663}
   m_Layer: 5
-  m_Name: Music
+  m_Name: MusicButtonObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 148047636032967371}
   m_Layer: 5
   m_Name: Sound
-  m_TagString: Untagged
+  m_TagString: SoundButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -505,19 +505,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1529287801869516929}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: ToggleSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5960388626029970917
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +520,7 @@ GameObject:
   - component: {fileID: 5419552121221873529}
   m_Layer: 5
   m_Name: Music
-  m_TagString: Untagged
+  m_TagString: MusicButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -637,19 +625,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1697579531022814194}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: ToggleMusicPlayback
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6640573604172364109
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2916854514468920419}
   m_Layer: 5
-  m_Name: SoundAndMusic
+  m_Name: SettingsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -699,9 +675,10 @@ GameObject:
   - component: {fileID: 1699547543312275879}
   - component: {fileID: 3886331119345021624}
   - component: {fileID: 6854849331781349956}
+  - component: {fileID: 2666929871062092829}
   m_Layer: 5
   m_Name: Settings Button
-  m_TagString: Untagged
+  m_TagString: SettingsButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -806,16 +783,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3886331119345021624}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: ToggleSettingsPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &2666929871062092829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8735131722341233112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d42f0fffd00f6941a02f2d3e9be8d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

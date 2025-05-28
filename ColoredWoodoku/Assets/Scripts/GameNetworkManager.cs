@@ -155,7 +155,6 @@ public class GameNetworkManager : NetworkBehaviour
         {
             timeoutMessageText.gameObject.SetActive(true);
             
-            // Explicitly check the network variable again just to be sure
             if (isDraw.Value)
             {
                 Debug.Log("Showing DRAW message");
@@ -766,17 +765,14 @@ public class GameNetworkManager : NetworkBehaviour
     [ClientRpc]
     private void DrawGameClientRpc()
     {
-        // Client can't modify NetworkVariables, but will receive the updated values from server
         Debug.Log("Received DrawGameClientRpc, isDraw=" + isDraw.Value);
         
-        // Hide timer
         GameObject timerObject = GameObject.Find("Timer");
         if (timerObject != null)
         {
             timerObject.SetActive(false);
         }
         
-        // Force update local display
         if (timeoutMessageText != null)
         {
             timeoutMessageText.gameObject.SetActive(true);

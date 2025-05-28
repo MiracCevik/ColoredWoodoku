@@ -2043,6 +2043,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1835530739}
     m_Modifications:
+    - target: {fileID: 148047636032967371, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1654748082}
+    - target: {fileID: 148047636032967371, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleSound
+      objectReference: {fileID: 0}
     - target: {fileID: 1345367919931425099, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2141,7 +2149,7 @@ PrefabInstance:
       objectReference: {fileID: 1654748082}
     - target: {fileID: 6854849331781349956, guid: 3a7c5f68a3a834d48ac7116ee8e809b0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenSettingsPanel
+      value: ToggleSettingsPanel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
